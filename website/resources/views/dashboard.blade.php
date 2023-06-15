@@ -10,35 +10,8 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("You're logged in!") }}
-
                 </div>
             </div>
         </div>
-        <head>
-    <title>User List</title>
-</head>
-<body>
-    <h1>User List</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($users as $user)
-                <tr>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-
-
-
-
     </div>
 </x-app-layout>
