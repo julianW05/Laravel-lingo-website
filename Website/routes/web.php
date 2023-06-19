@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FriendsController;
+use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Message;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,5 +37,18 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/friends', [FriendsController::class, 'store'])->name('friends.store');
     Route::delete('/friends/{friend}', [FriendsController::class, 'remove'])->name('friends.remove');
 });
+
+Route::get('/chats', function () {
+    $user = Auth::user();
+    $messages = Message::where('sender_id', $user->id)
+        ->orWhere('receiver_id', $user->id)
+        ->orderBy('created_at')
+        ->get();
+
+    return view('chats.chats', compact('messages'));
+})->name('chats.index')->middleware('auth');
+Route::post('/chats/send', [MessageController::class, 'send'])->name('chats.send')->middleware('auth');
+Route::post('/chats/clear', [MessageController::class, 'clearChats'])->name('chats.clear')->middleware('auth');
+
 
 require __DIR__.'/auth.php';

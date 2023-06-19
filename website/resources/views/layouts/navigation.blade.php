@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('friends.index')" :active="request()->routeIs('friends.index')">
                         {{ __('Vrienden') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('chats.index')" :active="request()->routeIs('chats.index')">
+                        {{ __('Chats') }}
+                    </x-nav-link>
                 </div>
             </div>
 

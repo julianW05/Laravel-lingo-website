@@ -23,7 +23,7 @@
                             @endforeach
                         </ul>
                     @else
-                        <p>No friends added yet.</p>
+                        <p>Nog geen vrienden toegevoegd.</p>
                     @endif
 
                     <div class="add_friends">

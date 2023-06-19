@@ -22,27 +22,27 @@ class FriendsController extends Controller
         $friend = User::where('email', $validatedData['email'])->first();
 
         if (!$friend) {
-            return redirect()->route('friends.index')->with('error', 'User with the provided email does not exist.');
+            return redirect()->route('friends.index')->with('error', 'Gebruiker met opgegeven e-mailadres bestaat niet.');
         }
 
         $user = auth()->user();
 
         if ($user->friends->contains($friend)) {
-            return redirect()->route('friends.index')->with('error', 'User is already added as a friend.');
+            return redirect()->route('friends.index')->with('error', 'Gebruiker is al toegevoegd als vriend.');
         }
 
         if ($friend->id === $user->id) {
-            return redirect()->route('friends.index')->with('error', 'You cannot add yourself as a friend.');
+            return redirect()->route('friends.index')->with('error', 'Je kunt jezelf niet toevoegen als vriend.');
         }
 
         $user->friends()->attach($friend);
 
-        return redirect()->route('friends.index')->with('success', 'Friend added successfully.');
+        return redirect()->route('friends.index')->with('success', 'Vriend toegevoegd.');
     }
 
     public function remove(User $friend)
     {
         auth()->user()->friends()->detach($friend);
-        return redirect()->route('friends.index')->with('success', 'Friend removed successfully.');
+        return redirect()->route('friends.index')->with('success', 'Vriend verwijderd.');
     }
 }
